@@ -18,3 +18,11 @@ echo($number + $negative)."<br>";
 $last_month = 1187.23;
 $this_month = 1089.98;
 echo($last_month - $this_month)."<br>";
+
+echo"<br>";
+
+$num_languages = 4;
+$months = 11;
+$days = 16;
+$days_per_language = $months * $days / $num_languages;
+echo"$days_per_language"."<br><br>";
