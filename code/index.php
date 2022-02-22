@@ -101,3 +101,12 @@ foreach ($nat as $i)
     }
 }
 echo"$c<br>";
+
+function printStringReturnNumber(string $string):int
+{
+    echo"$string";
+    return 127;
+}
+
+$my_num = printStringReturnNumber('Моё любимое число: ');
+echo $my_num;
