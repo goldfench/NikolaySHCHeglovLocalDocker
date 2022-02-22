@@ -109,4 +109,38 @@ function printStringReturnNumber(string $string):int
 }
 
 $my_num = printStringReturnNumber('Моё любимое число: ');
-echo $my_num;
+echo $my_num."<br>";
+
+function increaseEnthusiasm(string $string):string
+{
+    $string.='!';
+    return $string;
+}
+echo increaseEnthusiasm('Ура, товарищи')."<br>";
+function repeatThreeTimes(string $string):string
+{
+    $string.=$string.$string;
+    return $string;
+}
+echo repeatThreeTimes(increaseEnthusiasm('Ура'))."<br>";
+function cut(string $string, int $int=10):string
+{
+    $return = "";
+    for($i = 0; $i < $int*2; $i++)
+        $return.=$string[$i];
+    return $return;
+}
+echo cut("НуПрямоОченьИОченьДлиннаяПредлиннаяСтрока", 11)."<br>";
+$AnoterNum = 127127127127127;
+$c= 0;
+while ($AnoterNum >= 10)
+{
+    while ($AnoterNum > 0)
+    {
+        $c += $AnoterNum % 10;
+        $AnoterNum /= 10;
+    }
+    $AnoterNum = $c;
+    $c = 0;
+}
+echo"$AnoterNum";
