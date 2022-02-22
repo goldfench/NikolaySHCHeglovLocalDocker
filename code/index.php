@@ -26,3 +26,12 @@ $days_per_language = $months * $days / $num_languages;
 echo"$days_per_language"."<br><br>";
 
 echo(8**2)."<br><br>";
+
+$my_num = 2;
+$answer = $my_num;
+$answer +=2;
+$answer *=2;
+$answer -=2;
+$answer /=2;
+$answer -=$my_num;
+echo"$answer<br><br>";
