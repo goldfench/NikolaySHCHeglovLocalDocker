@@ -5,8 +5,8 @@ $very_bad_unclear_name = "15 chicken wings";
 // Write your code here:
 $order = &$very_bad_unclear_name;
 $order .=" and 15 strips and 40% discount";
-
 echo"\nYour order is:$very_bad_unclear_name.";
+
 
 $number = 23;
 echo"<br><br>$number";
@@ -19,13 +19,16 @@ $last_month = 1187.23;
 $this_month = 1089.98;
 echo($last_month - $this_month)."<br><br>";
 
+
 $num_languages = 4;
 $months = 11;
 $days = 16;
 $days_per_language = $months * $days / $num_languages;
 echo"$days_per_language"."<br><br>";
 
+
 echo(8**2)."<br><br>";
+
 
 $my_num = 2;
 $answer = $my_num;
@@ -35,6 +38,7 @@ $answer -=2;
 $answer /=2;
 $answer -=$my_num;
 echo"$answer<br><br>";
+
 
 $a=10;
 $b=3;
@@ -102,6 +106,7 @@ foreach ($nat as $i)
 }
 echo"$c<br>";
 
+
 function printStringReturnNumber(string $string):int
 {
     echo"$string";
@@ -144,6 +149,7 @@ while ($AnoterNum >= 10)
     $c = 0;
 }
 echo"$AnoterNum<br><br>";
+
 
 $list5 = [];
 $str = "x";
@@ -198,6 +204,7 @@ echo(count($arr))."<br>";
 echo$arr[count($arr)-1]."<br>";
 echo$arr[count($arr)-2]."<br><br>";
 
+
 function Ten(int $a, int $b):bool
 {
     $bool = false;
@@ -226,9 +233,26 @@ if (count($arr) == 3)
     echo$arr[0]+$arr[1]+$arr[2]."<br><br>";
 }
 
+
 $str = 'x';
 for ($i = 0; $i < 20; $i++)
 {
     echo$str."<br>";
     $str.='x';
 }
+
+
+$list10 = [1,2,3,4,5,6,7,8,9,10];
+echo (array_sum($list10) / count($list10))."<br>";
+echo (array_sum(range(1,100)))."<br>";
+print_r(array_map('sqrt',$list10))."<br>";
+$items = range(1,26);
+$keys = range('a', 'z');
+$NumberedAlfabet= array_combine($keys, $items);
+print_r($NumberedAlfabet);
+echo"<br>";
+$string = '1234567890';
+$pairs = str_split($string,2);
+$lists = array_map('str_split',$pairs);
+$sums = array_map('array_sum',$lists);
+print_r($sums);
