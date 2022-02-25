@@ -143,4 +143,57 @@ while ($AnoterNum >= 10)
     $AnoterNum = $c;
     $c = 0;
 }
-echo"$AnoterNum";
+echo"$AnoterNum<br><br>";
+
+$list5 = [];
+$str = "x";
+for ($i = 0; $i < 10; $i++)
+{
+    $list5[$i] = $str;
+    $str.="x";
+    echo"$list5[$i] ";
+}
+echo"<br>";
+function arrayFill(string $string, int $int)
+{
+    $list = [];
+    for ($i = 0; $i < $int; $i++)
+    {
+        $list[$i] = $string;
+        echo"$list[$i] ";
+    }
+    return $list;
+}
+$list6 = arrayFill("x",5);
+$list7 = [[1,2,3],[4,5],[6]];
+$sum = 0;
+for ($i = 0; $i < count($list7); $i++)
+{
+    for ($j = 0; $j < count($list7[$i]); $j++)
+    {
+        $sum += $list7[$i][$j];
+    }
+}
+echo"<br>$sum<br>";
+$list8 = [];
+$c = 1;
+for ($i = 0; $i <3; $i++)
+{
+    for ($j = 0; $j < 3; $j++)
+    {
+        $list8[$i][$j] = $c;
+        $c++;
+    }
+}
+print_r($list8);
+$list9 = [2,5,3,9];
+$result = ($list9[0]*$list9[1])+($list9[2]*$list9[3]);
+echo"<br>$result<br>";
+$user = ["name" => "Nikolay", "surname" => "SHCHeglov", "patronymic" => "Pavlovich"];
+echo$user["surname"]." ".$user["name"]." ".$user["patronymic"]."<br>";
+$date = ['year' => 2022, 'month' => '02', 'day' => '25'];
+echo$date["year"]."-".$date["month"]."-".$date["day"]."<br>";
+$arr=['a','b','c','d','e'];
+echo(count($arr))."<br>";
+echo$arr[count($arr)-1]."<br>";
+echo$arr[count($arr)-2]."<br><br>";
