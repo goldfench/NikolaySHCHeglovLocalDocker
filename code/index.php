@@ -197,3 +197,31 @@ $arr=['a','b','c','d','e'];
 echo(count($arr))."<br>";
 echo$arr[count($arr)-1]."<br>";
 echo$arr[count($arr)-2]."<br><br>";
+
+function Ten(int $a, int $b):bool
+{
+    $bool = false;
+    if ($a+$b > 10)
+    {
+        $bool = true;
+    }
+    return $bool;
+}
+$age = rand(0,110);
+echo"$age<br>";
+if ($age > 99)
+    echo"age больше 99ти<br>";
+elseif ($age < 10)
+    echo"age меньше 10<br>";
+else
+{
+    if (($age % 10)+($age / 10) < 10)
+        echo"сумма цифр одозначна<br>";
+    else
+        echo"сумма цифр двузначна<br>";
+}
+$arr = [1,2,3];
+if (count($arr) == 3)
+{
+    echo$arr[0]+$arr[1]+$arr[2]."<br>";
+}
