@@ -223,5 +223,12 @@ else
 $arr = [1,2,3];
 if (count($arr) == 3)
 {
-    echo$arr[0]+$arr[1]+$arr[2]."<br>";
+    echo$arr[0]+$arr[1]+$arr[2]."<br><br>";
+}
+
+$str = 'x';
+for ($i = 0; $i < 20; $i++)
+{
+    echo$str."<br>";
+    $str.='x';
 }
