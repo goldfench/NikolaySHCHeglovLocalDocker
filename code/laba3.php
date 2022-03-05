@@ -45,3 +45,26 @@ if ($_POST['getWordsAndSyms'])
     }
 }
 echo $_SESSION['textInfo'];
+
+
+?>
+    <body>
+    <form method="POST">
+        <label>
+            Name<input type="text" name="name" required><br>
+            Surname<input type="text" name="surname" required><br>
+            Age<input type="number" name="age" required><br>
+            <input type="submit" value="Отправить" name="send">
+        </label>
+    </form>
+    <a href="/UsersInfo.php">User's Info</a>
+    </body>
+<?php
+if ($_POST['send']) {
+    if ($_POST['name'] && $_POST['surname'] && $_POST['age']) {
+        $_SESSION['name'] = $_POST['name'];
+        $_SESSION['surname'] = $_POST['surname'];
+        $_SESSION['age'] = $_POST['age'];
+    }
+}
+?>
