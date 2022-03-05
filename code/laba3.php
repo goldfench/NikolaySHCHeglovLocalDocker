@@ -67,4 +67,28 @@ if ($_POST['send']) {
         $_SESSION['age'] = $_POST['age'];
     }
 }
+
+?>
+    <body>
+    <form method="POST">
+        <label>
+            Name<input type="text" name="name2" ><br>
+            Surname<input type="text" name="surname2" required><br>
+            Salary<input type="number" name="salary2" required><br>
+            Country<input type="text" name="country2" required><br>
+            <input type="submit" value="Отправить" name="send2"><br>
+        </label>
+        <a href="/UsersInfo.php">User's Info</a>
+    </form>
+    </body>
+<?php
+if ($_POST['send2']) {
+    if ($_POST['name2'] && $_POST['surname2'] && $_POST['salary2'] && $_POST['country2']) {
+        $_SESSION['userInformation'] = array('name' => $_POST['name2'],
+            'surname' => $_POST['surname2'],
+            'salary' => $_POST['salary2'],
+            'country' => $_POST['country2']
+        );
+    }
+}
 ?>
