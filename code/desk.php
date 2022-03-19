@@ -1,5 +1,17 @@
 <?php
-session_start()
+require "../vendor/autoload.php";
+$client = new Google_Client();
+$client->setApplicationName('Google Sheets API PHP Quickstart');
+$client->setScopes(Google_Service_Sheets::SPREADSHEETS_READONLY);
+$client->setAuthConfig('../credentials.json');
+$client->setAccessType('offline');
+$client->setPrompt('select_account consent');
+$service = new Google_Service_Sheets($client);
+$spreadsheetId = '13ixJlPRuhkFhySTPfW5Suu65t5iHVZYfPrTC0-y42uE';
+$range = 'AdData!A1:D';
+$response = $service->spreadsheets_values->get($spreadsheetId, $range);
+$values = $response->getValues();
+var_dump($values);
 ?>
 
     <!doctype html>
@@ -9,7 +21,7 @@ session_start()
         <title>Доска объявлений</title>
     </head>
     <body>
-    <form method="post">
+    <form action="/saveinfo.php" method="GET">
         <label>
             e-mail<br>
             <input type="Email" name="Email"><br>
@@ -29,76 +41,52 @@ session_start()
     </form>
     </body>
     </html>
+    <br>
+    <h1> Ads </h1>
+    <br>
 
 <?php
 
-function FindFiles(string $path): array
-{
-    $dir = dir($path);
-    $files = array();
-    if ($dir)
-    {
-        while (false !== ($name = $dir->read()))
-        {
-            if ($name === '.' || $name === '..') continue;
-            $FullName = $path . "/" . $name;
-            if (is_file($FullName)) $files[] = $name;
+$categories = scandir(__DIR__."/categories");
+$ads = [];
+foreach($categories as $category){
+    if ($category != "." && $category != ".."){
+        $ads[$category] = scandir("categories/$category");
+    }
+};
+echo "<table border=1><caption>Ads</caption>";
+foreach($ads as $category => $arr) {
+    echo "<tr><th colspan=3 align=center>" . ucfirst($category) . "</th></tr>";
+    foreach ($arr as $ad) {
+        if ($ad != "." && $ad != "..") {
+            $file = fopen("categories/$category/$ad", "r");
+            $email = fgets($file);
+            $header = fgets($file);
+            $adText = fgets($file);
+            echo "<tr><td>$email</td><td>$header</td><td>$adText</td></tr>";
         }
-        $dir->close();
-    }
-    return $files;
-}
-
-function AddFile(string $email, $category, $headline, $text)
-{
-    $file = fopen("./Categories/" . $category . "/" . $headline . ".txt", "w");
-    fwrite($file, $email . "\n" . $headline . "\n" . $text);
-}
-
-if (!empty($_POST["Email"]) and !empty($_POST["Categories"]) and !empty($_POST["Headline"]) and !empty($_POST["Text"]))
-{
-    AddFile($_POST["Email"], $_POST["Categories"], $_POST["Headline"], $_POST["Text"]);
-}
-
-$path = "./Categories";
-$dir = dir($path);
-$category = [];
-if ($dir)
-{
-    while (false !== ($name = $dir->read()))
-    {
-        if ($name === '.' || $name === '..') continue;
-        $FullName = $path . "/" . $name;
-        $category[] = $name;
-    }
-    $dir->close();
-}
-
-echo nl2br("\n");
-echo '<table border="1" width="100%">';
-echo '<tr bgcolor="#faebd7">';
-echo '<td width="20%">' . "Categories" . '</td>';
-echo '<td width="20%">' . "E-mail" . '</td>';
-echo '<td width="20%">' . "Headline" . '</td>';
-echo '<td width="20%">' . "Text" . '</td>';
-echo '</tr>';
-
-foreach ($category as $category_path)
-{
-    foreach (FindFiles('./Categories/' . $category_path) as $file)
-    {
-        echo '<tr>';
-        $fileInfo = file('./Categories/' . $category_path . "/" . $file);
-        echo '<td>' . $category_path . '</td>';
-        echo '<td>' . $fileInfo[0] . '</td>';
-        echo '<td>' . $fileInfo[1] . '</td>';
-        echo '<td>';
-        for ($i = 2; $i < sizeof($fileInfo); $i++)
-        {
-            echo nl2br($fileInfo[$i]);
-        }
-        echo '</td>';
-        echo '</tr>';
     }
 }
-echo '</table>';
+echo "</table>";
+?>
+<body>
+<form>
+    <label>
+        <h1>Ads from GoogleSheets</h1>
+        <table border=1>
+            <tr><th>Category</th><th>Email</th><th>Header</th><th>Text</th></tr>
+            <tbody>
+
+            <?php
+            foreach($values as $adData){
+                echo "<tr>" . "<td>" . ucfirst($adData[0]) . "</td>";
+                echo "<td>" . $adData[1] . "</td>";
+                echo "<td>" . $adData[2] . "</td>";
+                echo "<td>" . $adData[3] . "</td>" . "</tr>";
+            }
+            ?>
+            </tbody>
+        </table>
+    </label>
+</form>
+</body>
